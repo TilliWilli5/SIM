@@ -1,22 +1,4 @@
 "use strict";
-const SIMMode = {
-    ZERO:0,//Приложение только открыто
-    COMP:1,//Написание новой заметки
-    SEARCH:2,//Поиск
-    SYNC:3,//Синхронизация с каналом
-}
-const SIMModetoName = {
-    0: "ZERO",//Приложение только открыто
-    1: "COMP",//Написание новой заметки
-    2: "SEARCH",//Поиск
-    3: "SYNC",//Синхронизация с каналом
-}
-const SIMCharToMode = {
-    "":SIMMode.ZERO,
-    ".":SIMMode.COMP,
-    "?":SIMMode.SEARCH,
-    "@":SIMMode.SYNC
-}
 class SIM
 {
     constructor(){
@@ -50,7 +32,7 @@ class SIM
                 default : this.ChangeMode(SIMMode.COMP);break;
             }
         }
-        else if(pEvent.target.innerHTML === "" && pEvent.key === "Backspace")
+        else if(pEvent.target.value === "" && pEvent.key === "Backspace")
         {
             this.ChangeMode(SIMMode.ZERO);
         }
@@ -63,7 +45,16 @@ class SIM
         {
             case SIMMode.ZERO:{
                 this.view.querySelector("#modeIcon").ctrl.Hide();
-                this.view.querySelector("#titleInput").ctrl.Hide();
+                // this.view.querySelector("#titleLabel").ctrl.Hide();
+            };break;
+            case SIMMode.COMP:{
+                this.view.querySelector("#titleLabel").ctrl.Show();
+            };break;
+            case SIMMode.SEARCH:{
+                this.view.querySelector("#modeIcon").ctrl.ChangeMode(SIMMode.SEARCH);
+            };break;
+            case SIMMode.SYNC:{
+                this.view.querySelector("#modeIcon").ctrl.ChangeMode(SIMMode.SYNC);
             };break;
         }
     }

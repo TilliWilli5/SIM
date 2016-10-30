@@ -9,16 +9,23 @@ class ModeIcon
         this.view = pShelter;
         pShelter.ctrl = this;
     }
-    Show(){
+    Show(pMode){
         if(this.isHidden)
         {
-            this.style.animation = "scaleUp 6.s forwards";
+            this.view.innerHTML = SIMModeToChar[pMode];
+            this.view.style.animation = "scaleUp 0.6s forwards";
+            this.isHidden = false;
         }
     }
     Hide(){
         if(!this.isHidden)
         {
-            this.style.animation = "scaleUp 6.s reverse";
+            this.view.style.animation = "scaleDown 0.6s reverse forwards";
+            this.isHidden = true;
         }
+    }
+    ChangeMode(pMode){
+        this.Hide();
+        this.Show(pMode);
     }
 }
