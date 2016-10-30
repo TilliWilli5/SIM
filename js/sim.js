@@ -10,7 +10,7 @@ class SIM
         this.view = pShelter;
         this.AssignHandlers("titleInput", "keydown", [this.TitleFirstCharHandler, this.TitleEnterHandler]);
         this.AssignHandlers("descInput", "keydown", [this.DescBackspaceHandler, this.DescEnterHandler]);
-        // this.AssignHandlers("descInput", "keyup", [this.DescAutoResizeHandler]);
+        this.AssignHandlers("tagInput", "keydown", [this.TagBackspaceHandler]);
     }
     AssignHandlers(pElementId, pEventName, pHandlerArray){
         
@@ -81,6 +81,13 @@ class SIM
             }
         }
     }
+    TagBackspaceHandler(pEvent){
+        if(pEvent.key === "Backspace" && pEvent.target.value === "")
+        {
+            pEvent.preventDefault();
+            this.GotoDescInput();
+        }
+    }
     // DescAutoResizeHandler(pEvent){
     //     pEvent.target.style.height = "auto";
     //     pEvent.target.style.height = pEvent.target.scrollHeight + 10 + "px";
@@ -106,15 +113,17 @@ class SIM
             };break;
         }
     }
-    GotoDescInput(){
-        this.view.querySelector("#descBar").ctrl.Show();
-        this.view.querySelector("#descLabel").ctrl.Show();
-        this.view.querySelector("#descInput").focus();
-    }
     GotoTitleInput(){
         this.view.querySelector("#titleInput").focus();
         this.view.querySelector("#descLabel").ctrl.Hide();
         this.view.querySelector("#descBar").ctrl.Hide();
+    }
+    GotoDescInput(){
+        this.view.querySelector("#tagLabel").ctrl.Hide();
+        this.view.querySelector("#tagBar").ctrl.Hide();
+        this.view.querySelector("#descBar").ctrl.Show();
+        this.view.querySelector("#descLabel").ctrl.Show();
+        this.view.querySelector("#descInput").focus();
     }
     GotoTagInput(){
         this.view.querySelector("#tagBar").ctrl.Show();
