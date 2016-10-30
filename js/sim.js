@@ -10,7 +10,9 @@ class SIM
         this.view = pShelter;
         this.AssignHandlers("titleInput", "keydown", [this.TitleFirstCharHandler, this.TitleEnterHandler]);
         this.AssignHandlers("descInput", "keydown", [this.DescBackspaceHandler, this.DescEnterHandler]);
+        this.AssignHandlers("descInput", "keyup", [this.AutoResizeHandler]);
         this.AssignHandlers("tagInput", "keydown", [this.TagBackspaceHandler]);
+        this.AssignHandlers("tagInput", "keyup", [this.AutoResizeHandler]);
     }
     AssignHandlers(pElementId, pEventName, pHandlerArray){
         
@@ -88,10 +90,10 @@ class SIM
             this.GotoDescInput();
         }
     }
-    // DescAutoResizeHandler(pEvent){
-    //     pEvent.target.style.height = "auto";
-    //     pEvent.target.style.height = pEvent.target.scrollHeight + 10 + "px";
-    // }
+    AutoResizeHandler(pEvent){
+        pEvent.target.style.height = "auto";
+        pEvent.target.style.height = pEvent.target.scrollHeight + "px";
+    }
     //Events
     ChangeMode(pMode){
         this.mode = pMode;

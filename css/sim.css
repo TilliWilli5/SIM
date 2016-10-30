@@ -3,13 +3,13 @@
     border-radius:2px;
     border:1px solid lightgrey;
     overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
 }
 #sim #modeIcon
 {
-    /*display:none;*/
     font-size:2em;
     color:deepskyblue;
-    /*animation: scaleUp .6s;*/
 }
 #sim .preLabel
 {
@@ -17,16 +17,14 @@
     color:lightgrey;
     overflow: hidden;
     width:0em;
-    /*animation: xScaleUp .6s;*/
+    text-align: end;
 }
-#sim #titleInput, #sim #descInput, #sim #tagInput
+#titleInput, #descInput, #tagInput
 {
     font-size:2em;
     color: slategrey;
     resize: none;
     flex:1;
-}
-#descBar, #tagBar
-{
-    height:0px;
+    border:0px;
+    overflow: hidden;
 }

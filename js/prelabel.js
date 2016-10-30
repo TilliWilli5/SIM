@@ -22,7 +22,7 @@ class Prelabel
     Hide(){
         if(!this.isHidden)
         {
-            this.view.style.animation = `xScaleDown ${this.animDuration}s forwards`;
+            this.view.style.animation = `xScaleDown ${this.animDuration}s reverse forwards`;
             this.isHidden = true;
         }
     }
