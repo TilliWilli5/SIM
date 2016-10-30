@@ -26,3 +26,7 @@
     resize: none;
     flex:1;
 }
+#descBar, #tagBar
+{
+    height:0px;
+}

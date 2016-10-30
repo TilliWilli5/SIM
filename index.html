@@ -9,24 +9,26 @@
     </head>
     <body>
         <div id="sim">
-            <div class="bar size12">
+            <div id="titleBar" class="bar size12">
                 <div id="modeIcon"></div>
                 <div id="titleLabel" class="preLabel">Title</div>
                 <textarea id="titleInput" rows="1"></textarea>
             </div>
-            <div class="bar size12">
-                <div id="descLabel" class="preLabel" ><!--Description--></div>
-                <div id="descInput" contenteditable><!--Полное описание идеи--></div>
+            <div id="descBar" class="bar size12">
+                <div id="descLabel" class="preLabel" >Description</div>
+                <textarea id="descInput" rows="1"></textarea>
             </div>
-            <div class="bar size12">
+            <div id="tagBar" class="bar size12">
                 <div id="tagLabel" class="preLabel"><!--Tags--></div>
-                <div id="tagInput" contenteditable><!--#tag1 #tag2 #tag3 #tag4--></div>
+                <textarea id="tagInput" rows="1"></textarea>
             </div>
         </div>
         
+        <script src="js/prelabel.js"></script>
         <script src="js/enum.js"></script>
         <script src="js/sim.js"></script>
         <script src="js/mode_icon.js"></script>
+        <script src="js/bar.js"></script>
         <script src="app.js"></script>
     </body>
 </html>
