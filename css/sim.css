@@ -18,6 +18,7 @@
     overflow: hidden;
     width:0em;
     text-align: end;
+    padding:auto;
 }
 #titleInput, #descInput, #tagInput
 {
@@ -27,4 +28,8 @@
     flex:1;
     border:0px;
     overflow: hidden;
+}
+#descBar, #tagBar
+{
+    height:0px;
 }

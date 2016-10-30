@@ -91,7 +91,7 @@ class SIM
         }
     }
     AutoResizeHandler(pEvent){
-        pEvent.target.style.height = "auto";
+        pEvent.target.style.height = "1px";
         pEvent.target.style.height = pEvent.target.scrollHeight + "px";
     }
     //Events
