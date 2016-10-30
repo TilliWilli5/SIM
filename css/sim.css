@@ -1,0 +1,26 @@
+#sim
+{
+    border-radius:2px;
+    border:1px solid lightgrey;
+    overflow: hidden;
+}
+#sim #modeIcon
+{
+    display:none;
+    font-size:2em;
+    color:deepskyblue;
+    animation: scaleUp .6s;
+}
+#sim .preLabel
+{
+    font-size:2em;
+    color:lightgrey;
+    overflow: hidden;
+    width:0em;
+    /*animation: xScaleUp .6s;*/
+}
+#sim #titleInput, #sim #descInput, #sim #tagInput
+{
+    font-size:2em;
+    color: slategrey;
+}

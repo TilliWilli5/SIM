@@ -1,0 +1,14 @@
+*{box-sizing:border-box;}
+.bar{display:flex;}
+.size1 {flex:8.33%}
+.size2 {flex:16.66%}
+.size3 {flex:24.99%}
+.size4 {flex:33.33%}
+.size5 {flex:41.66%}
+.size6 {flex:49.99%}
+.size7 {flex:58.33%}
+.size8 {flex:66.66%}
+.size9 {flex:74.99%}
+.size10 {flex:83.33%}
+.size11 {flex:91.66%}
+.size12 {flex:100%}
