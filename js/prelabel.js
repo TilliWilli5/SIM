@@ -3,7 +3,9 @@ class Prelabel
     constructor(pCore){
         this.view = null;
         this.isHidden = true;
-        Object.assign(this, pCore);
+        this.animDuration = 0.6;
+        if(pCore)
+            Object.assign(this, pCore);
     }
     AttachTo(pShelter)
     {

@@ -8,49 +8,83 @@ class SIM
     AttachTo(pShelter){
         pShelter.ctrl = this;
         this.view = pShelter;
-        this.AssignHandlers("keydown", [this.FirstCharHandler, this.EnterHandler]);
+        this.AssignHandlers("titleInput", "keydown", [this.TitleFirstCharHandler, this.TitleEnterHandler]);
+        this.AssignHandlers("descInput", "keydown", [this.DescBackspaceHandler, this.DescEnterHandler]);
+        // this.AssignHandlers("descInput", "keyup", [this.DescAutoResizeHandler]);
     }
-    AssignHandlers(pEventName, pHandlerArray){
+    AssignHandlers(pElementId, pEventName, pHandlerArray){
+        
         for(let iX=0; iX<pHandlerArray.length; ++iX)
         {
             this.view.addEventListener(pEventName, function(pEvent){
-                pHandlerArray[iX].call(this.ctrl, pEvent);
+                if(pEvent.target.id === pElementId)
+                    pHandlerArray[iX].call(this.ctrl, pEvent);
             });
         }
     }
     //Handlers
-    FirstCharHandler(pEvent){
-        if(this.mode === SIMMode.ZERO)
-        {
-            //Фильтруем некоторые значения
-            if(pEvent.key === "Shift" || pEvent.key === "Alt" || pEvent.key === "Backspace" || pEvent.key === "Enter" || pEvent.key === "Tab")
-                return;
-            switch(pEvent.key)
-            {
-                case "?": this.ChangeMode(SIMMode.SEARCH);pEvent.preventDefault();break;
-                case "@": this.ChangeMode(SIMMode.SYNC);pEvent.preventDefault();break;
-                default : this.ChangeMode(SIMMode.COMP);break;
-            }
-        }
-        else if(pEvent.target.value === "" && pEvent.key === "Backspace")
-        {
-            this.ChangeMode(SIMMode.ZERO);
-        }
-    }
-    EnterHandler(pEvent){
-        if(pEvent.key === "Enter")
+    TitleFirstCharHandler(pEvent){
+        if(pEvent.target.id === "titleInput")
         {
             if(this.mode === SIMMode.ZERO)
             {
-                
+                //Фильтруем некоторые значения
+                if(pEvent.key === "Shift" || pEvent.key === "Alt" || pEvent.key === "Backspace" || pEvent.key === "Enter" || pEvent.key === "Tab")
+                    return;
+                switch(pEvent.key)
+                {
+                    case "?": this.ChangeMode(SIMMode.SEARCH);pEvent.preventDefault();break;
+                    case "@": this.ChangeMode(SIMMode.SYNC);pEvent.preventDefault();break;
+                    default : this.ChangeMode(SIMMode.COMP);break;
+                }
             }
-            else
+            else if(pEvent.key === "Backspace" && pEvent.target.value === "")
             {
-                this.GotoDescInput();
+                this.ChangeMode(SIMMode.ZERO);
             }
-            pEvent.preventDefault();
         }
     }
+    TitleEnterHandler(pEvent){
+        if(pEvent.target.id === "titleInput")
+        {
+            if(pEvent.key === "Enter")
+            {
+                if(this.mode === SIMMode.ZERO)
+                {
+                    
+                }
+                else
+                {
+                    this.GotoDescInput();
+                }
+                pEvent.preventDefault();
+            }
+        }
+    }
+    DescEnterHandler(pEvent){
+        if(pEvent.key === "Enter")
+        {
+            if(pEvent.target.value[pEvent.target.value.length-1] === "\n")
+            {
+                this.GotoTagInput();
+                pEvent.preventDefault();
+            }
+        }
+    }
+    DescBackspaceHandler(pEvent){
+        if(pEvent.target.id === "descInput")
+        {
+            if(pEvent.key === "Backspace" && pEvent.target.value === "")
+            {
+                pEvent.preventDefault();
+                this.GotoTitleInput();
+            }
+        }
+    }
+    // DescAutoResizeHandler(pEvent){
+    //     pEvent.target.style.height = "auto";
+    //     pEvent.target.style.height = pEvent.target.scrollHeight + 10 + "px";
+    // }
     //Events
     ChangeMode(pMode){
         this.mode = pMode;
@@ -76,5 +110,15 @@ class SIM
         this.view.querySelector("#descBar").ctrl.Show();
         this.view.querySelector("#descLabel").ctrl.Show();
         this.view.querySelector("#descInput").focus();
+    }
+    GotoTitleInput(){
+        this.view.querySelector("#titleInput").focus();
+        this.view.querySelector("#descLabel").ctrl.Hide();
+        this.view.querySelector("#descBar").ctrl.Hide();
+    }
+    GotoTagInput(){
+        this.view.querySelector("#tagBar").ctrl.Show();
+        this.view.querySelector("#tagLabel").ctrl.Show();
+        this.view.querySelector("#tagInput").focus();
     }
 }
