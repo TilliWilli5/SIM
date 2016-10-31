@@ -8,8 +8,8 @@ class SIM
     AttachTo(pShelter){
         pShelter.ctrl = this;
         this.view = pShelter;
-        this.AssignHandlers("titleInput", "keydown", [this.TitleFirstCharHandler, this.TitleEnterHandler]);
-        this.AssignHandlers("descInput", "keydown", [this.DescBackspaceHandler, this.DescEnterHandler]);
+        this.AssignHandlers("titleInput", "keydown", [this.TitleFirstCharHandler, this.TitleEnterHandler, this.TabHandler]);
+        this.AssignHandlers("descInput", "keydown", [this.DescBackspaceHandler, this.DescEnterHandler, this.TabHandler]);
         this.AssignHandlers("descInput", "keyup", [this.AutoResizeHandler]);
         this.AssignHandlers("tagInput", "keydown", [this.TagBackspaceHandler]);
         this.AssignHandlers("tagInput", "keyup", [this.AutoResizeHandler]);
@@ -93,6 +93,16 @@ class SIM
     AutoResizeHandler(pEvent){
         pEvent.target.style.height = "1px";
         pEvent.target.style.height = pEvent.target.scrollHeight + "px";
+    }
+    TabHandler(pEvent){
+        if(pEvent.key === "Tab")
+        {
+            pEvent.preventDefault();
+            if(pEvent.target.id === "titleInput")
+                this.GotoDescInput();
+            if(pEvent.target.id === "descInput")
+                this.GotoTagInput();
+        }
     }
     //Events
     ChangeMode(pMode){
