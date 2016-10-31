@@ -10,9 +10,7 @@ class SIM
         this.view = pShelter;
         this.AssignHandlers("titleInput", "keydown", [this.TitleFirstCharHandler, this.TitleEnterHandler, this.TabHandler]);
         this.AssignHandlers("descInput", "keydown", [this.DescBackspaceHandler, this.DescEnterHandler, this.TabHandler]);
-        this.AssignHandlers("descInput", "keyup", [this.AutoResizeHandler]);
         this.AssignHandlers("tagInput", "keydown", [this.TagBackspaceHandler]);
-        this.AssignHandlers("tagInput", "keyup", [this.AutoResizeHandler]);
     }
     AssignHandlers(pElementId, pEventName, pHandlerArray){
         
@@ -40,7 +38,7 @@ class SIM
                     default : this.ChangeMode(SIMMode.COMP);break;
                 }
             }
-            else if(pEvent.key === "Backspace" && pEvent.target.value === "")
+            else if(pEvent.key === "Backspace" && pEvent.target.innerText === "")
             {
                 this.ChangeMode(SIMMode.ZERO);
             }
@@ -66,7 +64,7 @@ class SIM
     DescEnterHandler(pEvent){
         if(pEvent.key === "Enter")
         {
-            if(pEvent.target.value[pEvent.target.value.length-1] === "\n")
+            if(pEvent.target.innerText[pEvent.target.innerText.length-1] === "\n" || pEvent.target.innerText === "")
             {
                 this.GotoTagInput();
                 pEvent.preventDefault();
@@ -76,7 +74,7 @@ class SIM
     DescBackspaceHandler(pEvent){
         if(pEvent.target.id === "descInput")
         {
-            if(pEvent.key === "Backspace" && pEvent.target.value === "")
+            if(pEvent.key === "Backspace" && pEvent.target.innerText.trim() === "")
             {
                 pEvent.preventDefault();
                 this.GotoTitleInput();
@@ -84,15 +82,11 @@ class SIM
         }
     }
     TagBackspaceHandler(pEvent){
-        if(pEvent.key === "Backspace" && pEvent.target.value === "")
+        if(pEvent.key === "Backspace" && pEvent.target.innerText.trim() === "")
         {
             pEvent.preventDefault();
             this.GotoDescInput();
         }
-    }
-    AutoResizeHandler(pEvent){
-        pEvent.target.style.height = "1px";
-        pEvent.target.style.height = pEvent.target.scrollHeight + "px";
     }
     TabHandler(pEvent){
         if(pEvent.key === "Tab")
@@ -126,7 +120,8 @@ class SIM
         }
     }
     GotoTitleInput(){
-        this.view.querySelector("#titleInput").focus();
+        this.FocusTo(this.view.querySelector("#titleInput"));//Фокусировка в Chrome
+        this.view.querySelector("#titleInput").focus();//Фокусировка в Firefox
         this.view.querySelector("#descLabel").ctrl.Hide();
         this.view.querySelector("#descBar").ctrl.Hide();
     }
@@ -135,11 +130,31 @@ class SIM
         this.view.querySelector("#tagBar").ctrl.Hide();
         this.view.querySelector("#descBar").ctrl.Show();
         this.view.querySelector("#descLabel").ctrl.Show();
-        this.view.querySelector("#descInput").focus();
+        this.FocusTo(this.view.querySelector("#descInput"));//Фокусировка в Chrome
+        this.view.querySelector("#descInput").focus();//Фокусировка в Firefox
     }
     GotoTagInput(){
         this.view.querySelector("#tagBar").ctrl.Show();
         this.view.querySelector("#tagLabel").ctrl.Show();
-        this.view.querySelector("#tagInput").focus();
+        this.FocusTo(this.view.querySelector("#tagInput"));//Фокусировка в Chrome
+        this.view.querySelector("#tagInput").focus();//Фокусировка в Firefox
+    }
+    FocusTo(pElement, pCollapseToStart){
+        let wasEmptyInput = false;
+        let selection = window.getSelection();
+        let range = document.createRange();
+        // range.setStart(pElement, 0);
+        // range.setEnd(pElement, 0);
+        if(pElement.innerHTML === "")
+        {
+            wasEmptyInput = true;
+            pElement.innerText = ".";
+        }
+        range.selectNodeContents(pElement);
+        range.collapse(pCollapseToStart);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        if(wasEmptyInput)
+            pElement.innerHTML = "";
     }
 }
