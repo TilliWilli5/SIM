@@ -11,7 +11,7 @@ class SIM
         this.view = pShelter;
         this.AssignHandlers("titleInput", "keydown", [this.TitleBackspaceHandler, this.TitleFirstCharHandler, this.TitleEnterHandler, this.TabHandler]);
         this.AssignHandlers("descInput", "keydown", [this.DescBackspaceHandler, this.DescEnterHandler, this.TabHandler]);
-        this.AssignHandlers("tagInput", "keydown", [this.TagBackspaceHandler]);
+        this.AssignHandlers("tagInput", "keydown", [this.TagBackspaceHandler, this.TagEnterHandler]);
     }
     AssignHandlers(pElementId, pEventName, pHandlerArray){
         
@@ -137,6 +137,17 @@ class SIM
             this.GotoDescInput();
         }
     }
+    TagEnterHandler(pEvent){
+        if(pEvent.key === "Enter")
+        {
+            if(pEvent.target.innerText === "")
+                this.CreateIssue();
+            else
+            {
+                pEvent.target.appendChild(new Tag(pEvent.target.innerText).Render());
+            }
+        }
+    }
     TabHandler(pEvent){
         if(pEvent.key === "Tab")
         {
@@ -193,6 +204,16 @@ class SIM
         this.FocusTo(this.view.querySelector("#tagInput"));//Фокусировка в Chrome
         this.view.querySelector("#tagInput").focus();//Фокусировка в Firefox
     }
+    CreateIssue(){
+
+    }
+    AddTag(){
+
+    }
+    DeleteTag(){
+
+    }
+    //Aux
     FocusTo(pElement, pCollapseToStart){
         let wasEmptyInput = false;
         let selection = window.getSelection();
