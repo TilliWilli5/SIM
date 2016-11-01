@@ -4,11 +4,12 @@ class SIM
     constructor(){
         this.mode = SIMMode.ZERO;
         this.view = null;
+        this.enviroment = util.DefineEnviroment();//Не оч красивое решение, но на первое время норм
     }
     AttachTo(pShelter){
         pShelter.ctrl = this;
         this.view = pShelter;
-        this.AssignHandlers("titleInput", "keydown", [this.TitleFirstCharHandler, this.TitleEnterHandler, this.TabHandler]);
+        this.AssignHandlers("titleInput", "keydown", [this.TitleBackspaceHandler, this.TitleFirstCharHandler, this.TitleEnterHandler, this.TabHandler]);
         this.AssignHandlers("descInput", "keydown", [this.DescBackspaceHandler, this.DescEnterHandler, this.TabHandler]);
         this.AssignHandlers("tagInput", "keydown", [this.TagBackspaceHandler]);
     }
@@ -38,10 +39,10 @@ class SIM
                     default : this.ChangeMode(SIMMode.COMP);break;
                 }
             }
-            else if(pEvent.key === "Backspace" && pEvent.target.innerText === "")
-            {
-                this.ChangeMode(SIMMode.ZERO);
-            }
+            // else if(pEvent.key === "Backspace" && pEvent.target.innerText === "")
+            // {
+            //     this.ChangeMode(SIMMode.ZERO);
+            // }
         }
     }
     TitleEnterHandler(pEvent){
@@ -61,29 +62,77 @@ class SIM
             }
         }
     }
+    TitleBackspaceHandler(pEvent){
+        if(pEvent.key === "Backspace" && pEvent.target.innerText.trim() === "")
+        {
+            pEvent.target.innerHTML = "";
+            pEvent.preventDefault();
+            this.ChangeMode(SIMMode.ZERO);
+        }
+    }
     DescEnterHandler(pEvent){
         if(pEvent.key === "Enter")
         {
-            if(pEvent.target.innerText[pEvent.target.innerText.length-1] === "\n" || pEvent.target.innerText === "")
+            let theTarget = pEvent.target;
+            let theText = theTarget.innerText;
+            //Если поле пустое - то однозначно переходим к след полю
+            if(theText === "")
             {
                 this.GotoTagInput();
                 pEvent.preventDefault();
             }
+            else
+            {
+                //Версия для Chrome
+                let newlinePosition = theText.indexOf("\n\n");
+                if((newlinePosition !== -1) && (newlinePosition === (theText.length - 2)))
+                {
+                    this.GotoTagInput();
+                    pEvent.preventDefault();
+                    //Версия для Firefox
+                    for(var iX=theTarget.childNodes.length-1; iX>=0; --iX)
+                    {
+                        if(theTarget.childNodes[iX].nodeName === "BR")
+                            theTarget.removeChild(theTarget.childNodes[iX]);
+                        else
+                            break;
+                    }
+                    //Версия для Chrome
+                    for(var iX=theTarget.childNodes.length-1; iX>=0; --iX)
+                    {
+                        if(theTarget.childNodes[iX].nodeName === "DIV" && theTarget.childNodes[iX].innerText.trim() === "")
+                            theTarget.removeChild(theTarget.childNodes[iX]);
+                        else
+                            break;
+                    }
+
+                }
+                //Версия для Firefox
+                // if(this.enviroment === UtilEnviroment.FIREFOX && theText[theText.length-1] === "\n")
+                // {
+                //     this.GotoTagInput();
+                //     pEvent.preventDefault();
+                // }
+            }
+            // if(pEvent.target.innerText[pEvent.target.innerText.length-1] === "\n" || pEvent.target.innerText === "")
+            // {
+            //     this.GotoTagInput();
+            //     pEvent.preventDefault();
+            // }
         }
     }
     DescBackspaceHandler(pEvent){
-        if(pEvent.target.id === "descInput")
+        if(pEvent.key === "Backspace" && pEvent.target.innerText.trim() === "")
         {
-            if(pEvent.key === "Backspace" && pEvent.target.innerText.trim() === "")
-            {
-                pEvent.preventDefault();
-                this.GotoTitleInput();
-            }
+            pEvent.target.innerHTML = "";
+            pEvent.preventDefault();
+            this.GotoTitleInput();
         }
     }
     TagBackspaceHandler(pEvent){
         if(pEvent.key === "Backspace" && pEvent.target.innerText.trim() === "")
         {
+            pEvent.target.innerHTML = "";
             pEvent.preventDefault();
             this.GotoDescInput();
         }
