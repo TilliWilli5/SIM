@@ -12,6 +12,8 @@ class SIM
         this.AssignHandlers("titleInput", "keydown", [this.TitleBackspaceHandler, this.TitleFirstCharHandler, this.TitleEnterHandler, this.TabHandler]);
         this.AssignHandlers("descInput", "keydown", [this.DescBackspaceHandler, this.DescEnterHandler, this.TabHandler]);
         this.AssignHandlers("tagInput", "keydown", [this.TagBackspaceHandler, this.TagEnterHandler]);
+        // let eventName = document.body.ontouchstart?"touchstart":"click";
+        // this.AssignHandlers("tagBar", eventName, [this.TagBarClickHandler]);
     }
     AssignHandlers(pElementId, pEventName, pHandlerArray){
         
@@ -144,7 +146,8 @@ class SIM
                 this.CreateIssue();
             else
             {
-                pEvent.target.appendChild(new Tag(pEvent.target.innerText).Render());
+                this.view.querySelector("#tagField").appendChild(new Tag(pEvent.target.innerText).Render());
+                pEvent.target.innerHTML = "";
             }
         }
     }
@@ -157,6 +160,10 @@ class SIM
             if(pEvent.target.id === "descInput")
                 this.GotoTagInput();
         }
+    }
+    TagBarClickHandler(pEvent){
+        this.FocusTo(this.view.querySelector("#tagInput"));//Фокусировка в Chrome
+        this.view.querySelector("#tagInput").focus();//Фокусировка в Firefox
     }
     //Events
     ChangeMode(pMode){
@@ -201,6 +208,10 @@ class SIM
         this.view.querySelector("#tagBar").ctrl.Show();
         this.view.querySelector("#tagLabel").ctrl.Show();
         this.view.querySelector("#descUnderline").style.display = "initial";
+        // this(this.view.querySelector("#tagInput").innerHTML === "")
+        // {
+        //     this.view.querySelector("#tagInput").innerHTML = "<br>";
+        // }
         this.FocusTo(this.view.querySelector("#tagInput"));//Фокусировка в Chrome
         this.view.querySelector("#tagInput").focus();//Фокусировка в Firefox
     }

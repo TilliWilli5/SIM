@@ -31,7 +31,7 @@ hr
     width:0em;
     text-align: center;
 }
-#titleInput, #descInput, #tagInput
+#titleInput, #descInput
 {
     font-size:2em;
     color: slategrey;
@@ -47,6 +47,33 @@ hr
     {
         outline: none;
     }
+#tagFieldBar
+{
+    /*display: flex;*/
+    /*font-size:2em;*/
+    /*color: slategrey;*/
+    resize: none;
+    flex:1;
+    border:0px;
+    overflow: hidden;
+    /*word-wrap: break-word;*/
+    /*word-break: break-all;*/
+}
+/*#tagField
+{
+    flex:1;
+}*/
+#tagInput
+{
+    font-size:2em;
+    color: slategrey;
+    resize: none;
+    flex:1;
+    border:0px;
+    overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
+}
 #descBar, #tagBar
 {
     height:0px;
@@ -58,17 +85,17 @@ Tags stuff
 */
 .tag
 {
-border:1px solid #3C9CC6;
+border:1px solid deepskyblue;
 border-radius:5px;
-background-color:rgba(192, 224, 239, 1);
+/*background-color:rgba(192, 224, 239, 1);*/
 display:inline-block;
-padding:0;
+padding:2px;
 margin:5px;
 }
 .tagLabel
 {
-color:#434D57;
-font-size:1.5vw;
+color:deepskyblue;
+font-size:2em;
 padding:0;
 margin:0;
 float:left;
@@ -76,13 +103,13 @@ float:left;
 .tagClose
 {
 vertical-align:middle;
-border:1px solid #2666AD;
-box-shadow:0px 0px 2px #2666AD;
-background-color:LightCoral;
+border:1px solid lightgray;
+/*box-shadow:0px 0px 2px #2666AD;*/
+/*background-color:LightCoral;*/
 width:1.25vw;
 height:1.25vw;
 border-radius:1vw;
-padding:0;
-margin:5px;
-font-weight:bold;
+/*padding:0;*/
+/*margin:5px;*/
+/*font-weight:bold;*/
 }
