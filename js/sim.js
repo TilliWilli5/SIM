@@ -124,18 +124,23 @@ class SIM
         this.view.querySelector("#titleInput").focus();//Фокусировка в Firefox
         this.view.querySelector("#descLabel").ctrl.Hide();
         this.view.querySelector("#descBar").ctrl.Hide();
+        this.view.querySelector("#descUnderline").style.display = "none";
+        this.view.querySelector("#titleUnderline").style.display = "none";
     }
     GotoDescInput(){
         this.view.querySelector("#tagLabel").ctrl.Hide();
         this.view.querySelector("#tagBar").ctrl.Hide();
         this.view.querySelector("#descBar").ctrl.Show();
         this.view.querySelector("#descLabel").ctrl.Show();
+        this.view.querySelector("#descUnderline").style.display = "none";
+        this.view.querySelector("#titleUnderline").style.display = "initial";
         this.FocusTo(this.view.querySelector("#descInput"));//Фокусировка в Chrome
         this.view.querySelector("#descInput").focus();//Фокусировка в Firefox
     }
     GotoTagInput(){
         this.view.querySelector("#tagBar").ctrl.Show();
         this.view.querySelector("#tagLabel").ctrl.Show();
+        this.view.querySelector("#descUnderline").style.display = "initial";
         this.FocusTo(this.view.querySelector("#tagInput"));//Фокусировка в Chrome
         this.view.querySelector("#tagInput").focus();//Фокусировка в Firefox
     }

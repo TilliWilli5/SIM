@@ -6,6 +6,18 @@
     display: flex;
     flex-wrap: wrap;
 }
+.bar
+{
+    /*border-bottom: 1px solid lightgray;*/
+}
+hr
+{
+    width:100%;
+    border-top:0px;
+    border-bottom:1px solid lightgray;
+    display:none;
+    animation:underlineUp 1s;
+}
 #sim #modeIcon
 {
     font-size:2em;
@@ -17,8 +29,7 @@
     color:lightgrey;
     overflow: hidden;
     width:0em;
-    text-align: end;
-    padding:auto;
+    text-align: center;
 }
 #titleInput, #descInput, #tagInput
 {
@@ -28,7 +39,14 @@
     flex:1;
     border:0px;
     overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
 }
+    /*Отключаем дефолтное оформление в Chrome*/
+    #titleInput:focus, #descInput:focus, #tagInput:focus
+    {
+        outline: none;
+    }
 #descBar, #tagBar
 {
     height:0px;

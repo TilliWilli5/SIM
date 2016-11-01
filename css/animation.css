@@ -11,12 +11,12 @@
 @keyframes xScaleUp
 {
     0%   {width:0em;opacity:0.0;}
-    100% {width:5em;opacity:1.0;}
+    100% {width:3em;opacity:1.0;}
 }
     @keyframes xScaleDown
     {
         0%   {width:0em;opacity:0.0;}
-        100% {width:5em;opacity:1.0;}
+        100% {width:3em;opacity:1.0;}
     }
 @keyframes yScaleUp
 {
@@ -27,4 +27,14 @@
     {
         0%   {height:0em;opacity:0.0;}
         100% {height:2em;opacity:1.0;}
+    }
+@keyframes underlineUp
+{
+    0%   {width:0%;opacity:0.0;}
+    100% {width:100%;opacity:1.0;}
+}
+    @keyframes underlineDown
+    {
+        0%   {width:0%;opacity:0.0;}
+        100% {width:100%;opacity:1.0;}
     }
