@@ -85,16 +85,26 @@ Tags stuff
 */
 .tag
 {
-border:1px solid deepskyblue;
+/*border:1px solid deepskyblue;*/
 border-radius:5px;
 /*background-color:rgba(192, 224, 239, 1);*/
 display:inline-block;
 padding:2px;
 margin:5px;
+color: lightgrey;
+transition: color 0.3s;
+cursor:pointer;
 }
+    .tag:hover
+    {
+        color:deepskyblue;
+        transition: color 0.3s;
+        /*background-color: deepskyblue;*/
+        /*transition: background-color 0.1s;*/
+    }
 .tagLabel
 {
-color:deepskyblue;
+color:inherit;
 font-size:2em;
 padding:0;
 margin:0;
@@ -102,14 +112,22 @@ float:left;
 }
 .tagClose
 {
-vertical-align:middle;
-border:1px solid lightgray;
+vertical-align:text-bottom;
+border:1px solid lightgrey;
+transition: border 0.1s;
 /*box-shadow:0px 0px 2px #2666AD;*/
 /*background-color:LightCoral;*/
 width:1.25vw;
 height:1.25vw;
 border-radius:1vw;
+background-color:rgba(0,0,0,0.0);
 /*padding:0;*/
 /*margin:5px;*/
 /*font-weight:bold;*/
 }
+    .tagClose:hover
+    {
+        /*background-color: indianred;*/
+        border:0.5vw solid indianred;
+        transition: border 0.1s;
+    }
