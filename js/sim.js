@@ -193,23 +193,23 @@ class SIM
         this.view.querySelector("#titleInput").focus();//Фокусировка в Firefox
         this.view.querySelector("#descLabel").ctrl.Hide();
         this.view.querySelector("#descBar").ctrl.Hide();
-        this.view.querySelector("#descUnderline").style.display = "none";
-        this.view.querySelector("#titleUnderline").style.display = "none";
+        this.view.querySelector("#descUnderline").ctrl.Hide();
+        this.view.querySelector("#titleUnderline").ctrl.Hide();
     }
     GotoDescInput(){
         this.view.querySelector("#tagLabel").ctrl.Hide();
         this.view.querySelector("#tagBar").ctrl.Hide();
         this.view.querySelector("#descBar").ctrl.Show();
         this.view.querySelector("#descLabel").ctrl.Show();
-        this.view.querySelector("#descUnderline").style.display = "none";
-        this.view.querySelector("#titleUnderline").style.display = "initial";
+        this.view.querySelector("#descUnderline").ctrl.Hide();
+        this.view.querySelector("#titleUnderline").ctrl.Show();
         this.FocusTo(this.view.querySelector("#descInput"));//Фокусировка в Chrome
         this.view.querySelector("#descInput").focus();//Фокусировка в Firefox
     }
     GotoTagInput(){
         this.view.querySelector("#tagBar").ctrl.Show();
         this.view.querySelector("#tagLabel").ctrl.Show();
-        this.view.querySelector("#descUnderline").style.display = "initial";
+        this.view.querySelector("#descUnderline").ctrl.Show();
         // this(this.view.querySelector("#tagInput").innerHTML === "")
         // {
         //     this.view.querySelector("#tagInput").innerHTML = "<br>";
@@ -219,6 +219,7 @@ class SIM
     }
     CreateIssue(){
         alert("Issue: [" + this.view.querySelector("#titleInput").innerText + "] created.");
+        this.Reset();
     }
     AddTag(){
 
@@ -244,5 +245,25 @@ class SIM
         selection.addRange(range);
         if(wasEmptyInput)
             pElement.innerHTML = "";
+    }
+    Reset(){
+        //Hide all stuff
+        this.view.querySelector("#tagLabel").ctrl.Hide();
+        this.view.querySelector("#tagBar").ctrl.Hide();
+        this.view.querySelector("#descUnderline").ctrl.Hide();
+        this.view.querySelector("#descLabel").ctrl.Hide();
+        this.view.querySelector("#descBar").ctrl.Hide();
+        this.view.querySelector("#titleUnderline").ctrl.Hide();
+        this.view.querySelector("#titleLabel").ctrl.Hide();
+        //Clear all inputs
+        this.view.querySelector("#tagField").innerHTML = "";
+        this.view.querySelector("#tagInput").innerHTML = "";
+        this.view.querySelector("#descInput").innerHTML = "";
+        this.view.querySelector("#titleInput").innerHTML = "";
+        //Init setup
+        this.mode = SIMMode.ZERO;
+        //Focus
+        this.FocusTo(this.view.querySelector("#titleInput"));//Фокусировка в Chrome
+        this.view.querySelector("#titleInput").focus();//Фокусировка в Firefox
     }
 }

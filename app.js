@@ -10,6 +10,9 @@ var app = (function(){
     $.descLabel = document.getElementById("descLabel");
     $.tagBar = document.getElementById("tagBar");
     $.tagLabel = document.getElementById("tagLabel");
+    $.titleUnderline = document.getElementById("titleUnderline");
+    $.descUnderline = document.getElementById("descUnderline");
+
     new SIM().AttachTo($.sim);
     new Prelabel().AttachTo($.titleLabel);
     new ModeIcon().AttachTo($.modeIcon);
@@ -18,6 +21,9 @@ var app = (function(){
     new Prelabel({animDuration:1.0}).AttachTo($.descLabel);
     new Bar({animDuration:0.4}).AttachTo($.tagBar);
     new Prelabel({animDuration:1.0}).AttachTo($.tagLabel);
+
+    new Underline().AttachTo($.titleUnderline);
+    new Underline().AttachTo($.descUnderline);
     //Последняя строка
     return $;
 })();
