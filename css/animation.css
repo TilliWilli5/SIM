@@ -38,3 +38,13 @@
         0%   {width:0%;opacity:0.0;}
         100% {width:100%;opacity:1.0;}
     }
+@keyframes tagShow
+{
+    0%   {transform: scale(0,0);opacity:0.0;}
+    100% {transform: scale(1,1);opacity:1.0;}
+}
+    @keyframes tagHide
+    {
+        0%   {transform: scale(0,0);opacity:0.0;}
+        100% {transform: scale(1,1);opacity:1.0;}
+    }

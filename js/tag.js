@@ -23,14 +23,23 @@ class Tag
             theButton.addEventListener(eventName, function(pEvent){
                 pEvent.target.parentNode.ctrl.Hide();
             });
-        theView.appendChild(theButton);
+        // theView.appendChild(theButton);
+        theView.addEventListener(eventName, function(pEvent){
+            // util.FindParent(pEvent.target, ".tag").ctrl.Hide();
+            // console.log(pEvent);
+            // pEvent.target.parentNode.ctrl.Hide();
+            this.ctrl.Hide();
+        });
         return theView;
     }
     Show(){
         this.view.style.display = "initial";
     }
     Hide(){
-        this.view.parentNode.removeChild(this.view);
+        this.view.style.animation = "tagHide 0.4s reverse forwards";
+        this.view.addEventListener("animationend", function(){
+            this.parentNode.removeChild(this);
+        }, false, true);
     }
 }
 // var NewTag = function NewTag(pValue){

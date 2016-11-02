@@ -142,11 +142,12 @@ class SIM
     TagEnterHandler(pEvent){
         if(pEvent.key === "Enter")
         {
-            if(pEvent.target.innerText === "")
+            if(pEvent.target.innerText.trim() === "")
                 this.CreateIssue();
             else
             {
                 this.view.querySelector("#tagField").appendChild(new Tag(pEvent.target.innerText).Render());
+                // util.FindParent(pEvent.target, "#tagInput", true).innerHTML = "";
                 pEvent.target.innerHTML = "";
             }
         }
@@ -216,7 +217,7 @@ class SIM
         this.view.querySelector("#tagInput").focus();//Фокусировка в Firefox
     }
     CreateIssue(){
-
+        alert("Issue: [" + this.view.querySelector("#titleInput").innerText + "] created.");
     }
     AddTag(){
 

@@ -91,24 +91,52 @@ border-radius:5px;
 display:inline-block;
 padding:2px;
 margin:5px;
-color: lightgrey;
+color: deepskyblue;
 transition: color 0.3s;
 cursor:pointer;
+position:relative;
+animation: tagShow 0.4s forwards;
 }
     .tag:hover
     {
-        color:deepskyblue;
+        color:indianred;
         transition: color 0.3s;
-        /*background-color: deepskyblue;*/
-        /*transition: background-color 0.1s;*/
+        /*text-decoration: line-through;
+        transition: text-decoration 0.3s;*/
+    }
+    .tag::before
+    {
+        content:"";
+        position:absolute;
+        border-bottom: 1px solid grey;
+        top:50%;
+        left:0px;
+        width:100%;
+        /*transition:width 0.3s;*/
+        transition:transform 0.1s;
+        transform:scale(0,1);
+    }
+    .tag:hover::before
+    {
+        content:"";
+        position:absolute;
+        border-bottom: 1px solid indianred;
+        top:50%;
+        left:0px;
+        width:100%;
+        /*transition:width 0.3s;*/
+        transition:transform 0.3s;
+        transform:scale(1,1);
     }
 .tagLabel
 {
 color:inherit;
+text-decoration: inherit;
 font-size:2em;
 padding:0;
 margin:0;
 float:left;
+/*position:relative;*/
 }
 .tagClose
 {

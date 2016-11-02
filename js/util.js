@@ -31,3 +31,27 @@ util.DefineEnviroment = function(){
         return UtilEnviroment.NODEJS;
     }
 }
+util.FindParent = function(pStartElement, pSelector = "", pInclusive = false){
+    let anchor = "id";
+    if(pSelector[0] === ".")
+    {
+        anchor = "className";
+        pSelector = pSelector.slice(1);
+    }
+    if(pSelector[0] === "#")
+    {
+        anchor = "id";
+        pSelector = pSelector.slice(1);
+    }
+    if(pInclusive && pStartElement[anchor] === pSelector)
+        return pStartElement;
+    function FindRecursively(pCurrentElement){
+        if(pCurrentElement.parentNode === null)
+            return null;
+        if(pCurrentElement.parentNode[anchor] === pSelector)
+            return pCurrentElement.parentNode;
+        else
+            return FindRecursively(pCurrentElement.parentNode);
+    };
+    return FindRecursively(pStartElement);
+}
