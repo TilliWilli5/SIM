@@ -47,6 +47,10 @@ hr
     {
         outline: none;
     }
+#tagBar
+{
+    cursor: text;
+}
 #tagFieldBar
 {
     /*display: flex;*/
@@ -59,10 +63,10 @@ hr
     /*word-wrap: break-word;*/
     /*word-break: break-all;*/
 }
-/*#tagField
+#tagField
 {
-    flex:1;
-}*/
+    float:left;
+}
 #tagInput
 {
     font-size:2em;
@@ -73,6 +77,7 @@ hr
     overflow: hidden;
     word-wrap: break-word;
     word-break: break-all;
+    float:left;
 }
 #descBar, #tagBar
 {

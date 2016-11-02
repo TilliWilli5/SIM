@@ -12,8 +12,9 @@ class SIM
         this.AssignHandlers("titleInput", "keydown", [this.TitleBackspaceHandler, this.TitleFirstCharHandler, this.TitleEnterHandler, this.TabHandler]);
         this.AssignHandlers("descInput", "keydown", [this.DescBackspaceHandler, this.DescEnterHandler, this.TabHandler]);
         this.AssignHandlers("tagInput", "keydown", [this.TagBackspaceHandler, this.TagEnterHandler]);
-        // let eventName = document.body.ontouchstart?"touchstart":"click";
-        // this.AssignHandlers("tagBar", eventName, [this.TagBarClickHandler]);
+        let eventName = document.body.ontouchstart?"touchstart":"click";
+        this.AssignHandlers("tagBar", eventName, [this.TagBarClickHandler]);
+        this.AssignHandlers("tagFieldBar", eventName, [this.TagBarClickHandler]);
     }
     AssignHandlers(pElementId, pEventName, pHandlerArray){
         
@@ -134,7 +135,7 @@ class SIM
     TagBackspaceHandler(pEvent){
         if(pEvent.key === "Backspace" && pEvent.target.innerText.trim() === "")
         {
-            pEvent.target.innerHTML = "";
+            pEvent.target.innerHTML = "&nbsp;";
             pEvent.preventDefault();
             this.GotoDescInput();
         }
@@ -146,10 +147,10 @@ class SIM
                 this.CreateIssue();
             else
             {
-                this.view.querySelector("#tagField").appendChild(new Tag(pEvent.target.innerText).Render());
-                // util.FindParent(pEvent.target, "#tagInput", true).innerHTML = "";
-                pEvent.target.innerHTML = "";
+                this.view.querySelector("#tagField").appendChild(new Tag(pEvent.target.innerText.trim()).Render());
+                pEvent.target.innerHTML = "&nbsp;";
             }
+            pEvent.preventDefault();
         }
     }
     TabHandler(pEvent){
